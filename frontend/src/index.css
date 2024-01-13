@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Sofia Pro Light";
+  src: url(/fonts/sofiapro/sofiapro-light.otf);
+}
+
+@font-face {
+  font-family: "TiemposHeadline-Regular";
+  src: url(/fonts/tiempos/TiemposHeadline-Regular.otf);
+}
+
+body {
+  background-color: #f7f7fe;
+}
+.spinner {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: conic-gradient(#0000 10%, #00b1b9);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: spinner-zp9dbg 1s infinite linear;
+}
+
+
+@keyframes spinner-zp9dbg {
+  to {
+    transform: rotate(1turn);
+  }
+}
+@keyframes logout {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-200%);
+  }
+}
+.loading-button::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 200%;
+  height: 5px;
+  border-radius: inherit;
+  background: #00b1b9;
+  animation: logout 2s infinite linear;
+}

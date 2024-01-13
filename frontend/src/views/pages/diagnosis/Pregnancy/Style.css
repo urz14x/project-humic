@@ -1,0 +1,3 @@
+input[type="radio"]:checked {
+    background-color: #00B1B9;
+}
