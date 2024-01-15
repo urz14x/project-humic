@@ -31,6 +31,30 @@ export default function Beranda() {
       title: "Total Pasien Persalinan",
       total: counts.total_patient_labors,
     },
+    {
+      title: "Total Pasien Nifas",
+      total: counts.total_patient_labors,
+    },
+    {
+      title: "Total Pasien KB",
+      total: counts.total_patient_labors,
+    },
+    {
+      title: "Total Pasien Kespro",
+      total: counts.total_patient_labors,
+    },
+    {
+      title: "Total Balita Tumbuh",
+      total: counts.total_patient_labors,
+    },
+    {
+      title: "Total Balita Kembang",
+      total: counts.total_patient_labors,
+    },
+    {
+      title: "Total Balita Emosional",
+      total: counts.total_patient_labors,
+    },
   ];
 
   useEffect(() => {

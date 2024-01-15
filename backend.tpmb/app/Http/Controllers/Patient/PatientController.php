@@ -36,7 +36,8 @@ class PatientController extends Controller
             "address" => "required|string",
             "status" => "required|string",
             "nik" => "required|unique:patients",
-            "no_rm" => "required|unique:patients"
+            "no_rm" => "required|unique:patients",
+            "total_payment" => "nullable|string"
         ]);
         Patient::create($patient);
         return response()->json([

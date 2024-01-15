@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string("status");
             $table->string("nik")->unique();
             $table->string("no_rm")->unique();
+            $table->string("total_payment")->nullable();
             $table->timestamps();
         });
     }
