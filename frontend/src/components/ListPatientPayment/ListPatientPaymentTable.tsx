@@ -1,19 +1,28 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
 
-import { RiCheckLine, RiInformationLine } from "react-icons/ri";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-
 export default function ListPatientPaymentTable({ patients }) {
+  const [paymentInput, setPaymentInput] = useState<string>("");
+  const [totalPayment, setTotalPayment] = useState("");
   const [seletedPatient, setSelectedPatient] = useState<null | number>(null);
   const [isOpen, setIsOpen] = useState(false);
   function closeModal() {
     setIsOpen(false);
   }
-  const handlePayment = () => {
-    console.log("hello");
+  const record = { paymentInput };
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    console.log(paymentInput);
+
+    try {
+      if (patients.total_payment === null) {
+        await axios.post("http://127.0.0.1:8000/api/v1/patients", record);
+      }
+      setPaymentInput("");
+    } catch (error) {
+      console.log(error);
+    }
   };
   function openModal(index: number) {
     setIsOpen(true);
@@ -65,29 +74,26 @@ export default function ListPatientPaymentTable({ patients }) {
                           <p className="text-colors_smooth_black mb-5 text-base">
                             Total bayar
                           </p>
-                          <input
-                            type="text"
-                            className={`py-1 px-3 border-2 border-colors_primary ring-colors_primary  focus:ring-2 focus:outline-none rounded-md placeholder-opacity-5 transition-all placeholder:text-sm font-sofia`}
-                            id="payment"
-                            placeholder="300.000"
-                          />
+
+                          <form onSubmit={handlePayment}>
+                            <input
+                              type="text"
+                              className={`py-1 px-3 border-2 border-colors_primary ring-colors_primary  focus:ring-2 focus:outline-none rounded-md placeholder-opacity-5 transition-all placeholder:text-sm font-sofia`}
+                              id="payment"
+                              onChange={(e) => setPaymentInput(e.target.value)}
+                              value={paymentInput}
+                              placeholder="300.000"
+                            />
+                            <div className="flex flex-row items-center mt-4">
+                              <button
+                                type="submit"
+                                className="w-full h-10 bg-colors_primary rounded-md text-colors_smooth_white font-sofia leading-3 flex items-center justify-center gap-3 hover:bg-colors_secondary transition-colors"
+                              >
+                                Bayar
+                              </button>
+                            </div>
+                          </form>
                         </div>
-                      </div>
-                    </Dialog.Description>
-                    <Dialog.Description as="div">
-                      <div className="flex flex-row items-center mt-4">
-                        <button
-                          onClick={() => console.log("test")}
-                          className="w-full h-10 bg-colors_primary rounded-md text-colors_smooth_white font-sofia leading-3 flex items-center justify-center gap-3 hover:bg-colors_secondary transition-colors"
-                        >
-                          {patient.diagnosis !== null ? (
-                            "Bayar"
-                          ) : (
-                            <Link to={`/pasien/create/${patient.id}`}>
-                              Sudah membayar
-                            </Link>
-                          )}
-                        </button>
                       </div>
                     </Dialog.Description>
                   </Dialog.Panel>
@@ -99,6 +105,9 @@ export default function ListPatientPaymentTable({ patients }) {
       );
     }
   }
+  useEffect(() => {
+    console.log(paymentInput);
+  }, []);
   return (
     <table className="w-full text-sm text-left text-colors_primary_low bg-colors_primary font-sofia rounded-md">
       <thead className="text-xs  uppercase font-sofia">

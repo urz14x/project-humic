@@ -28,8 +28,8 @@ class PatientResource extends JsonResource
             "no_rm" => $this->no_rm,
             // "created_at" => $this->created_at->format("d/m/Y"),
             "midwife" => $this->midwife,
-            "diagnosis" => $this->patientable
-
+            "diagnosis" => $this->patientable,
+            "total_payment" => $this->total_payment
         ];
     }
 }

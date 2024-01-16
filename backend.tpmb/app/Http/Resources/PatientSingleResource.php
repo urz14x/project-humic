@@ -23,7 +23,8 @@ class PatientSingleResource extends JsonResource
             "nik" => $this->nik,
             "no_rm" => $this->no_rm,
             "midwife" => $this->midwife,
-            "diagnosis" => $this->patientable
+            "diagnosis" => $this->patientable,
+            "total_payment" => $this->total_payment
         ];
     }
 }

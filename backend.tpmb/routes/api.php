@@ -22,6 +22,7 @@
     Route::get("/v1/all-patients", [AllPatientController::class, 'index']);
     Route::get("/v1/category/pregnancy", [AllPatientController::class, 'show_pregnancies']);
     Route::get("/v1/category/labors", [AllPatientController::class, 'show_labors']);
+
     //Kategori layanan
     Route::get('/v1/patients/create/diagnosis', [CategoryServiceController::class, 'index']);
 
