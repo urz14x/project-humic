@@ -17,12 +17,13 @@ class LaborResource extends JsonResource
         return [
             "id" => $this->id,
             "category_service_id" => $this->category_service_id,
-            "patient_id" => $this->patient_id,
-            "screening" => $this->screening,
+            "patient _id" => $this->patient_id,
+            "screening_history_of_caesarean" => $this->screening_history_of_caesarean,
             "latest_food" => $this->latest_food,
             "latest_drink" => $this->latest_drink,
             "latest_bab" => $this->latest_bab,
             "latest_sleep" => $this->latest_sleep,
+
         ];
     }
 }

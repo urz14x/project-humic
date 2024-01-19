@@ -66,20 +66,20 @@ class PatientController extends Controller
      */
     public function update(Request $request, Patient $patient)
     {
-        // $patient = $request->validate([
-        //     "midwife_id" => "required:unique",
-        //     "fullname" => "required|string",
-        //     "place_of_birth" => "required|string",
-        //     "date_of_birth" => "required|string",
-        //     "address" => "required|string",
-        //     "status" => "required|string",
-        //     "nik" => "required|unique:patients",
-        //     "no_rm" => "required|unique:patients",
-        //     "total_payment" => "nullable|string"
-        // ]);
+        $request->validate([
+            "total_payment" => "nullable|string"
+        ]);;
         $patient->find($patient->id);
         if ($patient) {
-            Patient::where("total_payment", null)->update(["total_payment" => $request->total_payment]);
+            // $patient->midwife_id = $request->midwife_id;
+            // $patient->fullname = $request->fullname;
+            // $patient->place_of_birth = $request->place_of_birth;
+            // $patient->date_of_birth = $request->date_of_birth;
+            // $patient->address = $request->address;
+            // $patient->status = $request->status;
+            $patient->total_payment = $request->total_payment;
+
+            $patient->update();
             return $patient;
         } else {
             return response()->json([

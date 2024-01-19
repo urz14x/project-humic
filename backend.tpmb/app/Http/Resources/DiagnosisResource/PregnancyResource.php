@@ -22,7 +22,7 @@ class PregnancyResource extends JsonResource
             "mestruation_time" => $this->mestruation_time,
             "menstruation_cycle" => $this->mestruation_cycle,
             "fetal_movement" => $this->fetal_movement,
-            "diseases_are_being_felt" => $this->diseases_are_being_felt,
+            "diseases_are_being_felpt" => $this->diseases_are_being_felt,
             "common_complaints" => $this->common_complaints,
             "herbs_consumed" => $this->herbs_consumed,
             "concerns_about_pregnancy" => $this->concerns_about_pregnancy,

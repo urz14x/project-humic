@@ -1,10 +1,10 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
+import { useParams } from "react-router-dom";
 
 export default function ListPatientPaymentTable({ patients }) {
   const [paymentInput, setPaymentInput] = useState<string>("");
-  const [totalPayment, setTotalPayment] = useState("");
   const [seletedPatient, setSelectedPatient] = useState<null | number>(null);
   const [isOpen, setIsOpen] = useState(false);
   function closeModal() {
@@ -13,12 +13,12 @@ export default function ListPatientPaymentTable({ patients }) {
   const record = { paymentInput };
   const handlePayment = async (e) => {
     e.preventDefault();
-    console.log(paymentInput);
 
     try {
-      if (patients.total_payment === null) {
-        await axios.post("http://127.0.0.1:8000/api/v1/patients", record);
-      }
+      await axios.post(
+        `http://127.0.0.1:8000/api/v1/patients/${patients}`,
+        record
+      );
       setPaymentInput("");
     } catch (error) {
       console.log(error);
@@ -29,6 +29,7 @@ export default function ListPatientPaymentTable({ patients }) {
     setSelectedPatient(index);
     console.log("patien dengan index", index);
   }
+  console.log(patients.id);
   function renderModal() {
     if (seletedPatient !== null) {
       const patient = patients[seletedPatient];
@@ -107,6 +108,9 @@ export default function ListPatientPaymentTable({ patients }) {
   }
   useEffect(() => {
     console.log(paymentInput);
+    async function getPatients() {
+      await axios.get("");
+    }
   }, []);
   return (
     <table className="w-full text-sm text-left text-colors_primary_low bg-colors_primary font-sofia rounded-md">

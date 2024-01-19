@@ -23,10 +23,7 @@
     Route::get("/v1/category/pregnancy", [AllPatientController::class, 'show_pregnancies']);
     Route::get("/v1/category/labors", [AllPatientController::class, 'show_labors']);
 
-    //Kategori layanan
-    Route::get('/v1/patients/create/diagnosis', [CategoryServiceController::class, 'index']);
 
-    //kehamilan
     Route::post('/v1/patients/pregnancy', PregnancyController::class);
     //Persalinan
     Route::post('/v1/patients/labor', LaborController::class);

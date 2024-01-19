@@ -32,10 +32,12 @@ export default function DetailPatient() {
   return (
     <section>
       {loading ? (
-        "Sedang mengambil data"
+        <h1 className="flex min-h-screen text-3xl font-sofia font-bold justify-center items-center">
+          Mengambil Data Pengguna...
+        </h1>
       ) : (
         <div className="flex justify-center items-center min-h-screen font-sofia">
-          <div className="w-[460px] h-auto border-2 rounded-md border-gray-300 transition-all p-5">
+          <div className="max-w-lg w-full h-auto border-2 rounded-md border-gray-300 transition-all p-5">
             <header className="flex justify-between items-center mb-10">
               <Link
                 to={"/pasien/laporan"}
@@ -71,6 +73,7 @@ export default function DetailPatient() {
                   <p>Screening : {patient.diagnosis?.screening}</p>
                 )} */}
                 <p>Nama pasien : {patient.fullname}</p>
+
                 {keys.map((key) => (
                   <p>
                     {key} : {patient.diagnosis?.[key]}

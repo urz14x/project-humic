@@ -1,14 +1,22 @@
-import { Fragment, useState } from "react";
+import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
 
 import { RiCheckLine, RiInformationLine } from "react-icons/ri";
-import { Link, redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useReactToPrint } from "react-to-print";
 
 export default function ListPatientTable({ patients }) {
   const [seletedPatient, setSelectedPatient] = useState<null | number>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const componentPDF = useRef();
+  const generatePDF = useReactToPrint({
+    content: () => componentPDF.current,
+    documentTitle: "DataPasien",
+    onAfterPrint: () => alert("Data PDF Di Save!"),
+  });
+  console.log(generatePDF);
   function closeModal() {
     setIsOpen(false);
   }
@@ -152,48 +160,58 @@ export default function ListPatientTable({ patients }) {
     }
   }
   return (
-    <table className="w-full text-sm text-left text-colors_primary_low bg-colors_primary font-sofia rounded-md">
-      <thead className="text-xs  uppercase font-sofia">
-        <tr>
-          <th scope="col" className="px-6 py-3">
-            Nama lengkap
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Alamat
-          </th>
-          <th scope="col" className="px-6 py-3">
-            NIK
-          </th>
-          <th scope="col" className="px-6 py-3">
-            NO RM
-          </th>
-          <th scope="col" className="px-6 py-3">
-            Aksi
-          </th>
-        </tr>
-      </thead>
-      <tbody className="text-colors_primary_low">
-        {patients.map((patient, index: number) => (
-          <tr
-            className="bg-white hover:bg-colors_primary_low text-colors_smooth_black hover:shadow-sm"
-            key={index}
-          >
-            <th scope="row" className="px-6 py-4 font-medium text-gray-900">
-              {patient.fullname}
-            </th>
+    <div>
+      <button
+        onClick={generatePDF}
+        className="mb-5 bg-colors_primary px-4 py-2 font-sofia text-colors_smooth_white rounded-md"
+      >
+        Cetak PDF
+      </button>
+      <div ref={componentPDF} className="w-full">
+        <table className="w-full text-sm text-left text-colors_primary_low bg-colors_primary font-sofia rounded-md">
+          <thead className="text-xs  uppercase font-sofia">
+            <tr>
+              <th scope="col" className="px-6 py-3">
+                Nama lengkap
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Alamat
+              </th>
+              <th scope="col" className="px-6 py-3">
+                NIK
+              </th>
+              <th scope="col" className="px-6 py-3">
+                NO RM
+              </th>
+              <th scope="col" className="px-6 py-3">
+                Aksi
+              </th>
+            </tr>
+          </thead>
+          <tbody className="text-colors_primary_low">
+            {patients.map((patient, index: number) => (
+              <tr
+                className="bg-white hover:bg-colors_primary_low text-colors_smooth_black hover:shadow-sm"
+                key={index}
+              >
+                <th scope="row" className="px-6 py-4 font-medium text-gray-900">
+                  {patient.fullname}
+                </th>
 
-            <td className="px-7 py-4">{patient.address}</td>
-            <td className="px-7 py-4">{patient.nik}</td>
-            <td className="px-7 py-4">{patient.no_rm}</td>
-            <td className="px-7 py-4">
-              {renderModal()}
-              <button onClick={() => openModal(index)}>
-                <RiInformationLine className="w-5 h-5"></RiInformationLine>
-              </button>
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+                <td className="px-7 py-4">{patient.address}</td>
+                <td className="px-7 py-4">{patient.nik}</td>
+                <td className="px-7 py-4">{patient.no_rm}</td>
+                <td className="px-7 py-4">
+                  {renderModal()}
+                  <button onClick={() => openModal(index)}>
+                    <RiInformationLine className="w-5 h-5"></RiInformationLine>
+                  </button>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
