@@ -15,6 +15,7 @@ import DetailPatient from "../views/pages/patient/DetailPatient";
 import Labor from "../views/pages/diagnosis/Labors/Labor";
 import Nifas from "../views/pages/diagnosis/Nifas/Nifas";
 import Payment from "../views/pages/menu_lainnya/Payment";
+import DetailPayment from "../views/pages/patient/DetailPayment";
 
 export default function Router() {
   return (
@@ -140,6 +141,16 @@ export default function Router() {
         element={
           <Authenticated>
             <DetailPatient />
+          </Authenticated>
+        }
+      />
+      <Route
+        path="/pasien/:id/detail/payment"
+        element={
+          <Authenticated>
+            <Dashboard>
+              <DetailPayment />
+            </Dashboard>
           </Authenticated>
         }
       />

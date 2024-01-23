@@ -1,7 +1,7 @@
 import { Fragment, useEffect, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, NavLink, useParams } from "react-router-dom";
 
 export default function ListPatientPaymentTable({ patients }) {
   const [paymentInput, setPaymentInput] = useState<string>("");
@@ -148,11 +148,12 @@ export default function ListPatientPaymentTable({ patients }) {
             <td className="px-7 py-4">{patient.no_rm}</td>
             <td className="px-7 py-4">
               {renderModal()}
-              <button onClick={() => openModal(index)}>
-                <button className="text-colors_smooth_black underline">
-                  Status Pembayaran
-                </button>
-              </button>
+              <NavLink
+                to={`/pasien/${patient.id}/detail/payment`}
+                className="text-colors_smooth_black underline"
+              >
+                Status Pembayaran
+              </NavLink>
             </td>
           </tr>
         ))}
