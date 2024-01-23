@@ -249,9 +249,9 @@ function Dashboard({ children }: Props) {
           </aside>
         </>
         <main
-          className={`ml-0 ${
+          className={`ml-0 lg:ml-0 ${
             openSidebar ? "lg:ml-0" : "lg:ml-64"
-          } lg:ml-64 py-16 sm:text-justify px-16`}
+          } py-16 sm:text-justify px-16`}
         >
           {children}
         </main>

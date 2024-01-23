@@ -1,13 +1,11 @@
 import { useEffect } from "react";
-import {
-  RiArrowLeftSLine,
-  RiArrowRightSFill
-} from "react-icons/ri";
+import { RiArrowLeftSLine, RiArrowRightSFill } from "react-icons/ri";
 import { NavLink } from "react-router-dom";
 
 export default function DaftarPasien() {
   useEffect(() => {
     document.title = "Daftar pasien";
+    window.location.reload();
   }, []);
   return (
     <section>
@@ -66,9 +64,7 @@ export default function DaftarPasien() {
           </ol>
         </nav>
       </div>
-    <div className="flex flex-col">
-
-    </div>
+      <div className="flex flex-col"></div>
       <table className="w-full text-sm text-left text-gray-500">
         <thead className="text-xs text-colors_smooth_white uppercase font-sofia">
           <tr>
